@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- Windows 专用：WPF + Win32 截屏/窗口枚举 -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>StudentClient</RootNamespace>
+    <AssemblyName>监考学生端</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <!-- 允许在 Linux/macOS 上交叉编译（CI 验证用）；正式运行仍需 Windows -->
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProctorCommon\ProctorCommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- System.Drawing.Common 仅用于 GDI 抓帧与 JPEG 编码，运行时只在 Windows 使用 -->
+    <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

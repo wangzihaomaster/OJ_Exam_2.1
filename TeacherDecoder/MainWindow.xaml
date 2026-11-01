@@ -1,0 +1,59 @@
+<Window x:Class="TeacherDecoder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="比赛纪律信息解密工具（教师端）" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 打开文件 + 口令 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="BtnOpen" Content="打开纪律信息文件(.disc)…" Height="34" Padding="10,0"
+                    FontSize="14" Click="BtnOpen_Click"/>
+            <TextBlock Text="解密口令：" VerticalAlignment="Center" Margin="20,0,6,0" FontSize="14"/>
+            <PasswordBox x:Name="TxtPassword" Width="220" Height="30" FontSize="14"/>
+            <Button x:Name="BtnDecrypt" Content="解密" Height="34" Padding="14,0" Margin="10,0,0,0"
+                    FontSize="14" FontWeight="Bold" Click="BtnDecrypt_Click"/>
+            <Button x:Name="BtnExportPlain" Content="导出明文 JSON" Height="34" Padding="10,0"
+                    Margin="16,0,0,0" IsEnabled="False" Click="BtnExportPlain_Click"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Margin="0,8,0,4" Foreground="Gray"
+                   Text="提示：可把 .disc 文件直接拖入本窗口；口令与学生端导出时输入的考场口令一致。"/>
+
+        <!-- 解密结果 -->
+        <TabControl x:Name="Tabs" Grid.Row="2" Margin="0,4,0,0">
+            <TabItem Header="概览">
+                <TextBox x:Name="TxtSummary" IsReadOnly="True" FontSize="14" Padding="8"
+                         VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+            </TabItem>
+            <TabItem Header="违规记录">
+                <ListBox x:Name="LstViolations" FontFamily="Consolas" FontSize="13"/>
+            </TabItem>
+            <TabItem Header="代码提交">
+                <DockPanel>
+                    <ListBox x:Name="LstSubmissions" DockPanel.Dock="Left" Width="300"
+                             SelectionChanged="LstSubmissions_SelectionChanged" FontSize="13"/>
+                    <TextBox x:Name="TxtCodeView" IsReadOnly="True" FontFamily="Consolas" FontSize="13"
+                             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                             Padding="6"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="原始 JSON">
+                <TextBox x:Name="TxtJson" IsReadOnly="True" FontFamily="Consolas" FontSize="12"
+                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="6"/>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar Grid.Row="3">
+            <StatusBarItem>
+                <TextBlock x:Name="LblStatus" Text="未加载文件"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
