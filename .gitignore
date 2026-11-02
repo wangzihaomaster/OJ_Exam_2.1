@@ -1,0 +1,13 @@
+publish/
+*.dll
+*.exe
+*.pdb
+*.class
+*.o
+*.obj
+*.so
+*.a
+*.out
+bin/
+obj/
+*.zip
